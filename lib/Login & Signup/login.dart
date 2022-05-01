@@ -1,6 +1,7 @@
 import 'package:cineverse/Utils/Colors.dart';
-import 'package:flutter/foundation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -19,22 +20,29 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-            child: TextFormField(
-                decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: textFormFieldBackgroundColor),
-                        borderRadius: BorderRadius.circular(4.0)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: textFormFieldBackgroundColor),
-                        borderRadius: BorderRadius.circular(4.0)),
-                    filled: true,
-                    fillColor: textFormFieldBackgroundColor,
+              padding:
+                  const EdgeInsets.only(left: 20.0, right: 20.0, top: 80.0),
+              child: IntlPhoneField(
+                onChanged: (phone) {
+                  print(phone.number);
+                },
+                onCountryChanged: (country) {
+                  print(country.dialCode);
+                },
+                initialCountryCode: 'IN',
+                flagsButtonMargin: const EdgeInsets.only(left: 10.0),
+                style: const TextStyle(
+                    fontSize: 14,
+                    fontFamily: "Poppins",
+                    color: Color.fromARGB(255, 88, 88, 88)),
+                showDropdownIcon: false,
+                showCountryFlag: false,
+                decoration: const InputDecoration(
                     hintText: "Enter your phone",
-                    hintStyle: const TextStyle(fontFamily: "Poppins"))),
-          ),
+                    fillColor: textFormFieldBackgroundColor,
+                    filled: true,
+                    border: OutlineInputBorder(borderSide: BorderSide.none)),
+              )),
           const SizedBox(
             height: 20.0,
           ),
@@ -114,40 +122,54 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: redColor, borderRadius: BorderRadius.circular(4.0)),
-              margin: const EdgeInsets.only(top: 50),
-              height: 55.0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.only(left: 50.0),
-                    child: Text(
-                      "Continue",
-                      style: TextStyle(
-                          fontFamily: "Poppins",
-                          fontSize: 18.0,
-                          color: Colors.white),
+            child: GestureDetector(
+              onTap: () => {verifying},
+              child: Container(
+                decoration: BoxDecoration(
+                    color: redColor, borderRadius: BorderRadius.circular(4.0)),
+                margin: const EdgeInsets.only(top: 50),
+                height: 55.0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.only(left: 50.0),
+                      child: Text(
+                        "Continue",
+                        style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize: 18.0,
+                            color: Colors.white),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 38.0),
-                    child: Text(
-                      ">",
-                      style: TextStyle(
-                          fontFamily: "Poppins",
-                          fontSize: 18.0,
-                          color: Colors.white),
-                    ),
-                  )
-                ],
+                    Padding(
+                      padding: EdgeInsets.only(right: 38.0),
+                      child: Text(
+                        ">",
+                        style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize: 18.0,
+                            color: Colors.white),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
         ],
       )),
+    );
+  }
+
+  verifying() async {
+    print("object");
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: "+919169140735",
+      verificationCompleted: (PhoneAuthCredential credential) {},
+      verificationFailed: (FirebaseAuthException exception) {},
+      codeSent: (String verificationId, int? resendToken) {},
+      codeAutoRetrievalTimeout: (String verificationId) {},
     );
   }
 }
