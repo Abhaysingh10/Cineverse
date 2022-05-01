@@ -1,3 +1,5 @@
+import 'package:cineverse/Dashboard/Firebase/FirebaseAuth.dart';
+import 'package:cineverse/Dashboard/Home.dart';
 import 'package:cineverse/Utils/Colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -68,25 +70,30 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-            child: Container(
-              height: 60.0,
-              decoration: BoxDecoration(
-                  color: textFormFieldBackgroundColor,
-                  borderRadius: BorderRadius.circular(4.0)),
-              child: Row(children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: Image.network(
-                    "https://img.icons8.com/color/48/000000/google-logo.png",
-                    scale: 1.5,
+            child: GestureDetector(
+              onTap: () {
+                signInWithGoogle();
+              },
+              child: Container(
+                height: 60.0,
+                decoration: BoxDecoration(
+                    color: textFormFieldBackgroundColor,
+                    borderRadius: BorderRadius.circular(4.0)),
+                child: Row(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                    child: Image.network(
+                      "https://img.icons8.com/color/48/000000/google-logo.png",
+                      scale: 1.5,
+                    ),
                   ),
-                ),
-                const Text("GOOGLE",
-                    style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontSize: 18,
-                        color: Color.fromARGB(255, 114, 114, 114)))
-              ]),
+                  const Text("GOOGLE",
+                      style: TextStyle(
+                          fontFamily: "Poppins",
+                          fontSize: 18,
+                          color: Color.fromARGB(255, 114, 114, 114)))
+                ]),
+              ),
             ),
           ),
           const SizedBox(
@@ -123,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
           Padding(
             padding: const EdgeInsets.only(left: 20.0, right: 20.0),
             child: GestureDetector(
-              onTap: () => {verifying},
+              onTap: () => {verifying()},
               child: Container(
                 decoration: BoxDecoration(
                     color: redColor, borderRadius: BorderRadius.circular(4.0)),
@@ -163,13 +170,30 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   verifying() async {
-    print("object");
     await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: "+919169140735",
+      phoneNumber: "+6505551212",
       verificationCompleted: (PhoneAuthCredential credential) {},
-      verificationFailed: (FirebaseAuthException exception) {},
+      verificationFailed: (FirebaseAuthException exception) {
+        if (exception.code == 'invalid-phone-number') {
+          print("Entered phone number is not valid. ");
+        }
+      },
       codeSent: (String verificationId, int? resendToken) {},
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
+  }
+
+  void signInWithGoogle() async {
+    FirebaseService firebaseService = FirebaseService();
+    await firebaseService.signInWithGoogle();
+
+    User? user = FirebaseAuth.instance.currentUser;
+    print(user?.email);
+    if (user != null) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: ((context) => const HomePage())));
+    } else {
+      print("Some error occured.");
+    }
   }
 }

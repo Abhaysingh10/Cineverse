@@ -60,6 +60,8 @@ MERGED from D:\Flutter\cineverse\android\app\src\main\AndroidManifest.xml:1:1-34
 MERGED from [:firebase_auth] D:\Flutter\cineverse\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-15:12
 MERGED from [:firebase_core] D:\Flutter\cineverse\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-15:12
 MERGED from [:smart_auth] D:\Flutter\cineverse\build\smart_auth\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:google_sign_in_android] D:\Flutter\cineverse\build\google_sign_in_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Abhay\.gradle\caches\transforms-2\files-2.1\02d04e6dfdbeb319e115f5728d226784\multidex-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\Abhay\.gradle\caches\transforms-2\files-2.1\a3b86b42fafb2019c6d99a912992ce19\jetified-window-java-1.0.0-beta04\AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\Abhay\.gradle\caches\transforms-2\files-2.1\cea45e25bbe77c9713c39e234ccfd7bd\jetified-window-1.0.0-beta04\AndroidManifest.xml:17:1-33:12
 MERGED from [com.google.firebase:firebase-analytics:20.1.2] C:\Users\Abhay\.gradle\caches\transforms-2\files-2.1\9fe73b7a7cd9f70b50d4672b43846ff6\jetified-firebase-analytics-20.1.2\AndroidManifest.xml:2:1-9:12
@@ -140,6 +142,10 @@ MERGED from [:firebase_core] D:\Flutter\cineverse\build\firebase_core\intermedia
 MERGED from [:firebase_core] D:\Flutter\cineverse\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:smart_auth] D:\Flutter\cineverse\build\smart_auth\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:smart_auth] D:\Flutter\cineverse\build\smart_auth\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:google_sign_in_android] D:\Flutter\cineverse\build\google_sign_in_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:google_sign_in_android] D:\Flutter\cineverse\build\google_sign_in_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Abhay\.gradle\caches\transforms-2\files-2.1\02d04e6dfdbeb319e115f5728d226784\multidex-2.0.0\AndroidManifest.xml:20:5-43
+MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Abhay\.gradle\caches\transforms-2\files-2.1\02d04e6dfdbeb319e115f5728d226784\multidex-2.0.0\AndroidManifest.xml:20:5-43
 MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\Abhay\.gradle\caches\transforms-2\files-2.1\a3b86b42fafb2019c6d99a912992ce19\jetified-window-java-1.0.0-beta04\AndroidManifest.xml:19:5-21:41
 MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\Abhay\.gradle\caches\transforms-2\files-2.1\a3b86b42fafb2019c6d99a912992ce19\jetified-window-java-1.0.0-beta04\AndroidManifest.xml:19:5-21:41
 MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\Abhay\.gradle\caches\transforms-2\files-2.1\cea45e25bbe77c9713c39e234ccfd7bd\jetified-window-1.0.0-beta04\AndroidManifest.xml:20:5-22:41
@@ -256,6 +262,8 @@ INJECTED from D:\Flutter\cineverse\android\app\src\debug\AndroidManifest.xml
 		INJECTED from D:\Flutter\cineverse\android\app\src\debug\AndroidManifest.xml
 uses-permission#android.permission.INTERNET
 ADDED from D:\Flutter\cineverse\android\app\src\debug\AndroidManifest.xml:6:5-66
+MERGED from [:google_sign_in_android] D:\Flutter\cineverse\build\google_sign_in_android\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-67
+MERGED from [:google_sign_in_android] D:\Flutter\cineverse\build\google_sign_in_android\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-67
 MERGED from [com.google.firebase:firebase-auth:21.0.3] C:\Users\Abhay\.gradle\caches\transforms-2\files-2.1\0cd31a8007b82ec10dce55ca37be1d81\jetified-firebase-auth-21.0.3\AndroidManifest.xml:23:5-67
 MERGED from [com.google.firebase:firebase-auth:21.0.3] C:\Users\Abhay\.gradle\caches\transforms-2\files-2.1\0cd31a8007b82ec10dce55ca37be1d81\jetified-firebase-auth-21.0.3\AndroidManifest.xml:23:5-67
 MERGED from [com.google.android.gms:play-services-measurement-api:20.1.2] C:\Users\Abhay\.gradle\caches\transforms-2\files-2.1\c2afdd64ca750e4dbd9b2ae4acc88fc5\jetified-play-services-measurement-api-20.1.2\AndroidManifest.xml:22:5-67
