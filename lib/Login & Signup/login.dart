@@ -1,6 +1,8 @@
-import 'package:cineverse/Dashboard/Firebase/FirebaseAuth.dart';
+import 'package:cineverse/Firebase/FirebaseAuth.dart';
 import 'package:cineverse/Dashboard/Home.dart';
+import 'package:cineverse/Models/UserModel.dart';
 import 'package:cineverse/Utils/Colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -185,14 +187,27 @@ class _LoginPageState extends State<LoginPage> {
 
   void signInWithGoogle() async {
     FirebaseService firebaseService = FirebaseService();
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
     await firebaseService.signInWithGoogle();
 
     User? user = FirebaseAuth.instance.currentUser;
-    print(user?.email);
+
+    UserModel userModel = UserModel(
+      user: user!.displayName.toString(),
+      email: user.email.toString(),
+      emailVerified: user.emailVerified,
+      phoneNumber: user.phoneNumber,
+    );
+
     if (user != null) {
+      await firestore.collection("users").doc(user.uid).set(userModel.toJson());
+      // .add({"username": user.displayName, "email": user.email})
+      // .then((value) => print("Added the account in firestore"))
+      // .catchError((error) => print("Some error occurred !!"));
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: ((context) => const HomePage())));
     } else {
+      // ignore: avoid_print
       print("Some error occured.");
     }
   }

@@ -1,10 +1,14 @@
 import 'dart:ffi';
 
-import 'package:cineverse/Dashboard/Firebase/FirebaseAuth.dart';
+import 'package:cineverse/Firebase/FirebaseAuth.dart';
 import 'package:cineverse/Login%20&%20Signup/login.dart';
+import 'package:cineverse/Models/UserModel.dart' as model;
+import 'package:cineverse/Providers/UserProvider.dart';
 import 'package:cineverse/Utils/Colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,19 +20,26 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    model.UserModel userInfo = Provider.of<UserProvider>(context).getUserModel;
+
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Center(
-              child: Text("This is me the user"),
+            Center(
+              child: Text(
+                "This is me ${userInfo.user}",
+                style: TextStyle(color: backgroundColor, fontFamily: "Poppins"),
+              ),
             ),
             GestureDetector(
               onTap: () {
                 signout();
               },
-              child: const Text("Logout"),
+              child: const Text("Logout",
+                  style: TextStyle(color: backgroundColor)),
             )
           ],
         ),
@@ -37,6 +48,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void signout() async {
+    //User? user = FirebaseAuth.instance.currentUser;
+    //print(user?.displayName.toString());
+
     FirebaseService firebaseService = FirebaseService();
     await firebaseService.GoogleSignOut();
 
