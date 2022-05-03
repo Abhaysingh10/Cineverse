@@ -1,6 +1,7 @@
 import 'package:cineverse/Firebase/FirebaseAuth.dart';
 import 'package:cineverse/Dashboard/Home.dart';
 import 'package:cineverse/Models/UserModel.dart';
+import 'package:cineverse/ParentWidget.dart';
 import 'package:cineverse/Utils/Colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -188,6 +189,7 @@ class _LoginPageState extends State<LoginPage> {
   void signInWithGoogle() async {
     FirebaseService firebaseService = FirebaseService();
     FirebaseFirestore firestore = FirebaseFirestore.instance;
+
     await firebaseService.signInWithGoogle();
 
     User? user = FirebaseAuth.instance.currentUser;
@@ -199,13 +201,17 @@ class _LoginPageState extends State<LoginPage> {
       phoneNumber: user.phoneNumber,
     );
 
+    Future<DocumentSnapshot> doc =
+        firestore.collection("users").doc(user.uid).get();
+    print(doc);
+
     if (user != null) {
-      await firestore.collection("users").doc(user.uid).set(userModel.toJson());
+      //await firestore.collection("users").doc(user.uid).set(userModel.toJson());
       // .add({"username": user.displayName, "email": user.email})
       // .then((value) => print("Added the account in firestore"))
       // .catchError((error) => print("Some error occurred !!"));
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: ((context) => const HomePage())));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: ((context) => const ParentWidget())));
     } else {
       // ignore: avoid_print
       print("Some error occured.");

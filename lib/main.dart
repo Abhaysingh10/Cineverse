@@ -35,7 +35,6 @@ class MyApp extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.active) {
             if (snapshot.hasData) {
-              print(snapshot.data);
               return const ParentWidget();
             } else if (snapshot.hasError) {
               return const Center(

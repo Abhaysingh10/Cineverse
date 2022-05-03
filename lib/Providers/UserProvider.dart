@@ -3,13 +3,16 @@ import 'package:cineverse/Models/UserModel.dart';
 import 'package:flutter/material.dart';
 
 class UserProvider extends ChangeNotifier {
-  late UserModel userModel;
+  UserModel? _userModel;
   FirebaseService firebaseService = FirebaseService();
-  UserModel get getUserModel => userModel;
+  UserModel get getUserModel => _userModel!;
 
   Future<void> refershUser() async {
     UserModel? user = await firebaseService.getUserDetails();
-    userModel = user!;
+    _userModel = user!;
+
+    print(_userModel?.email);
+
     notifyListeners();
   }
 }

@@ -34,12 +34,28 @@ class FirebaseService {
 
   Future<UserModel?> getUserDetails() async {
     User? user = FirebaseAuth.instance.currentUser;
-
+    print("Inside FirebaseAuth");
     if (user != null) {
+      UserModel userModel = UserModel(
+        user: user.displayName.toString(),
+        email: user.email.toString(),
+        emailVerified: user.emailVerified,
+        phoneNumber: user.phoneNumber,
+      );
+
       DocumentSnapshot snap = await FirebaseFirestore.instance
           .collection("users")
           .doc(user.uid)
-          .get();
+          .get()
+          // ignore: avoid_print
+          .catchError((error) => print("Found this error ${error.toString()}"));
+
+      if (snap.data() == null) {
+        await FirebaseFirestore.instance
+            .collection("users")
+            .doc(user.uid)
+            .set(userModel.toJson());
+      }
       return UserModel.fromsnap(snap);
     }
   }

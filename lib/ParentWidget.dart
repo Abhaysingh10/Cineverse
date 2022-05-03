@@ -12,22 +12,40 @@ class ParentWidget extends StatefulWidget {
 }
 
 class _ParentWidgetState extends State<ParentWidget> {
+  bool isLoading = false;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    print("Inside parent widget");
     addData();
   }
 
   addData() async {
+    setState(() {
+      isLoading = true;
+    });
     UserProvider userProvider = Provider.of(context, listen: false);
+    print("userprovider instance created");
     await userProvider.refershUser();
+
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, contraints) {
-      return const HomePage();
+      return isLoading
+          ? const Center(
+              child: CircularProgressIndicator(
+                color: Colors.blue,
+                strokeWidth: 2,
+              ),
+            )
+          : const HomePage();
     });
   }
 }

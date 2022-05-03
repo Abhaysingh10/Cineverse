@@ -20,7 +20,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    model.UserModel userInfo = Provider.of<UserProvider>(context).getUserModel;
+    model.UserModel userInfo =
+        Provider.of<UserProvider>(context, listen: false).getUserModel;
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -30,8 +31,10 @@ class _HomePageState extends State<HomePage> {
           children: [
             Center(
               child: Text(
-                "This is me ${userInfo.user}",
-                style: TextStyle(color: backgroundColor, fontFamily: "Poppins"),
+                "This is me ${userInfo.user}, ${userInfo.phoneNumber}, ${userInfo.email}",
+                //"Text",
+                style: const TextStyle(
+                    color: backgroundColor, fontFamily: "Poppins"),
               ),
             ),
             GestureDetector(
