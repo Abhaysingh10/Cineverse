@@ -33,8 +33,10 @@ class FirebaseService {
   }
 
   Future<UserModel?> getUserDetails() async {
+    DocumentSnapshot snap;
     User? user = FirebaseAuth.instance.currentUser;
-    print("Inside FirebaseAuth");
+    print("Inside FirebaseAuth getting user info ${user}");
+
     if (user != null) {
       UserModel userModel = UserModel(
         user: user.displayName.toString(),
@@ -43,18 +45,28 @@ class FirebaseService {
         phoneNumber: user.phoneNumber,
       );
 
-      DocumentSnapshot snap = await FirebaseFirestore.instance
+      snap = await FirebaseFirestore.instance
           .collection("users")
           .doc(user.uid)
           .get()
           // ignore: avoid_print
           .catchError((error) => print("Found this error ${error.toString()}"));
 
+      print("After receiving the snap ${snap.data()}");
+
       if (snap.data() == null) {
         await FirebaseFirestore.instance
             .collection("users")
             .doc(user.uid)
             .set(userModel.toJson());
+
+        snap = await FirebaseFirestore.instance
+            .collection("users")
+            .doc(user.uid)
+            .get()
+            // ignore: avoid_print
+            .catchError(
+                (error) => print("Found this error ${error.toString()}"));
       }
       return UserModel.fromsnap(snap);
     }

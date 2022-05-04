@@ -29,10 +29,12 @@ class _ParentWidgetState extends State<ParentWidget> {
     UserProvider userProvider = Provider.of(context, listen: false);
     print("userprovider instance created");
     await userProvider.refershUser();
-
-    setState(() {
-      isLoading = false;
-    });
+    print("After userProvider refreshed user");
+    if (mounted) {
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
