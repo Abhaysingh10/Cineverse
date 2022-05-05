@@ -206,10 +206,6 @@ class _LoginPageState extends State<LoginPage> {
     print(doc);
 
     if (user != null) {
-      //await firestore.collection("users").doc(user.uid).set(userModel.toJson());
-      // .add({"username": user.displayName, "email": user.email})
-      // .then((value) => print("Added the account in firestore"))
-      // .catchError((error) => print("Some error occurred !!"));
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: ((context) => const ParentWidget())));
     } else {
