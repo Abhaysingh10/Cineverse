@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                       padding: const EdgeInsets.only(left: 12.0, top: 12.0),
                       child: Container(
                         color: backgroundColor,
-                        height: MediaQuery.of(context).size.height * 0.25,
+                        height: MediaQuery.of(context).size.height * 0.18,
                         width: 500,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
@@ -122,6 +122,7 @@ class _HomePageState extends State<HomePage> {
                                       width: 95,
                                       height: 95,
                                       decoration: BoxDecoration(
+                                          // color: Colors.red,
                                           image: DecorationImage(
                                               image: NetworkImage(
                                                   "${e.get('poster')}"),
@@ -134,8 +135,10 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     Text(
                                       e.get('movieName'),
-                                      style: TextStyle(fontFamily: "Poppins"),
-                                    )
+                                      style: const TextStyle(
+                                          fontFamily: "Poppins",
+                                          fontSize: 12.0),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -147,7 +150,51 @@ class _HomePageState extends State<HomePage> {
                   }
                   return const CircularProgressIndicator();
                 },
-              )
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 23.0),
+                child: Column(
+                  children: [
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "For you",
+                        style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          genre("All"),
+                          const SizedBox(
+                            width: 15.0,
+                          ),
+                          genre("Action"),
+                          const SizedBox(
+                            width: 15.0,
+                          ),
+                          genre("Romantic"),
+                          const SizedBox(
+                            width: 15.0,
+                          ),
+                          genre("Thriller"),
+                          const SizedBox(
+                            width: 15.0,
+                          ),
+                          genre("Comedy")
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ],
           ),
         ));
@@ -162,5 +209,24 @@ class _HomePageState extends State<HomePage> {
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: ((context) => const LoginPage())));
     }
+  }
+
+  genre(String value) {
+    return (Container(
+      padding: EdgeInsets.all(10.0),
+      constraints:
+          BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.7),
+      height: 40,
+      child: Text(
+        value.toString(),
+        style: const TextStyle(
+            color: Color.fromARGB(230, 253, 4, 70),
+            fontFamily: "Poppins",
+            fontWeight: FontWeight.bold),
+      ),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.0),
+          color: Color.fromARGB(44, 242, 5, 68)),
+    ));
   }
 }
